@@ -1,3 +1,4 @@
+from pickle import FALSE
 import django_on_heroku
 from .base import *
 
@@ -25,7 +26,7 @@ AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl':'max-age=86400'
 }
 
-AWS_LOCATION = 'static/'
+AWS_LOCATION = 'static'
 
 AWS_QUERYSTRING_AUTH = False
 
