@@ -1,0 +1,200 @@
+{% extends 'weebs/base.html' %}
+{% load static %}
+{% block body %}
+
+<section class="s-content s-content--single">
+    <div class="row">
+        <div class="column large-12">
+{% for post in posts %}
+    <article class="s-post entry format-standard">
+            
+        <div class="s-content__media">
+            <div class="s-content__post-thumb">
+            
+            
+                            <img src="{{ post.poster_image_md.url }}" class="img-fluid" alt="Responsive image">
+            
+            </div>
+        </div> <!-- end s-content__media -->
+
+
+
+        <div class="s-content__primary">
+
+            <h2 style="color: #111322 ;" class="s-content__title s-content__title--post">{{ post.title }} </h2>
+
+            <ul class="s-content__post-meta">
+                <li class="date">{{ post.created_on }}</li>
+                {% if post.Type == 'manhwa'%}
+                    <li class="cat"><a href=" {% url 'manhwa'  %} "> {{ post.Type}} </a>
+                {%endif %}
+
+                {% if post.Type == 'manhua'%}
+                    <li class="cat"><a href=" {% url 'manhua'  %} "> {{ post.Type}} </a>
+                {%endif %}
+            </ul>
+
+            <p class="lead" style="color: #a03e4a; font-weight: 200;">
+                {{ post.body }}
+        </p> 
+
+            
+
+            
+            {% if post.Type == 'manhwa' %}
+                {% for post in post.manhwa.all %}
+                <h2>{{ post.title }}</h2>
+                {% if post.image %}
+                <img src="{{ post.image.url }}" class="img-fluid" alt="Responsive image">
+                {% endif %}
+                <blockquote> 
+                    <p>
+                        <strong>{{ post.about}}</strong>
+                    </p>
+                    <cite>Author- {{ post.author}}</cite>
+                    <p></p>
+                </blockquote>
+
+                <p>{{ post.story }}</p>
+                {% endfor %}
+            {% endif %}
+
+            {% if post.Type == 'manhua' %}
+                {% for post in post.manhua.all %}
+                <h2>{{ post.title }}</h2>
+                {% if post.image %}
+                <img src="{{ post.image.url }}" class="img-fluid" alt="Responsive image">
+                {% endif %}
+                <blockquote> 
+                    <p>
+                        <strong>{{ post.about}}</strong>
+                    </p>
+                    <cite>Author- {{ post.author}}</cite>
+                </blockquote>
+
+                <p>{{ post.story }}</p>
+                {% endfor %}
+            {% endif %}
+         
+
+            <div class="s-content__author">
+                <img src=" {% static 'images/avatars/user-06.jpg' %} " alt="">
+
+                <div class="about">
+                    <h5><a href="#"></a></h5>
+                
+                    <p>{{ post.author }}
+                    </p>
+
+                    <ul class="author-social">
+                        <li><a href=" {% static '#0' %} ">Facebook</a></li>
+                        <li><a href=" {% static '#0' %} ">Twitter</a></li>
+                        <li><a href=" {% static '#0' %} ">Dribbble</a></li>
+                        <li><a href=" {% static '#0' %} ">Instagram</i></a></li>
+                    </ul>
+                </div>
+            </div> <!-- end s-content__author -->
+
+
+            
+
+        </div> <!-- end s-content__primary -->
+    </article>
+    <div class="comments-wrap">
+
+        <div id="comments" class="row">
+            <div class="column">
+
+                <h3>{{ count }} Comments</h3>
+                
+                <!-- START commentlist -->
+                <ol class="commentlist">
+                    {% for comment in post.comments.all %}  
+                        <li class="depth-1 comment">
+
+                            <div class="comment__avatar">
+                                <img class="avatar" src=" {% static 'images/avatars/profile.png' %} " alt="" width="50" height="50">
+                            </div>
+
+                            <div class="comment__content">
+
+                                <div class="comment__info">
+                                    <div class="comment__author">{{ comment.name }}</div>
+
+                                    <div class="comment__meta">
+                                        <div class="comment__time">{{ comment.datepublished }}</div>
+                                        <div class="comment__reply">
+                                            <a class="comment-reply-link" href=" {% static '#0' %} ">Reply</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="comment__text">
+                                <p> {{ comment.comment }} </p>
+                                </div>
+
+                            </div>
+
+                        </li> <!-- end comment level 1 -->
+                    {% endfor %}
+                </ol>
+                <!-- END commentlist -->
+
+            </div> <!-- end col-full -->
+        </div> <!-- end comments -->
+
+
+        <div class="row comment-respond">
+
+            <!-- START respond -->
+            <div id="respond" class="column">
+
+                <h3>
+                Add Comment 
+                <span>Your email address will not be published.</span>
+                </h3>
+
+                <form name="contactForm" id="contactForm" method="post" action="{% url 'comment' post.id %}" autocomplete="off">
+                    {% csrf_token %}
+                    <fieldset>
+
+                        <div class="form-field">
+                            <input name="cName" id="cName" class="h-full-width" placeholder="Your Name" value="" type="text">
+                        </div>
+
+                        <div class="form-field">
+                            <input name="cEmail" id="cEmail" class="h-full-width" placeholder="Your Email" value="" type="text">
+                        </div>
+
+                        <div class="form-field">
+                            <input name="cWebsite" id="cWebsite" class="h-full-width" placeholder="Website" value="" type="text">
+                        </div>
+
+                        <div class="message form-field">
+                            <textarea name="cMessage" id="cMessage" class="h-full-width" placeholder="Your Message"></textarea>
+                        </div>
+
+                        <input name="submit" id="submit" class="btn btn--primary btn-wide btn--large h-full-width" value="Add Comment" type="submit">
+
+                    </fieldset>
+                </form> <!-- end form -->
+
+            </div>
+            <!-- END respond-->
+
+        </div> <!-- end comment-respond -->
+
+    </div> <!-- end comments-wrap -->
+
+{% endfor %}
+
+</div> <!-- end column -->
+</div> <!-- end row -->
+
+
+
+
+</section> <!-- end s-content -->
+
+{% endblock %}
+

@@ -1,0 +1,218 @@
+{% extends 'weebs/base.html' %}
+{% load static %}
+
+{% block script %}
+    <script>
+        document.addEventListener('DOMContentLoaded',function(){
+            if ( document.querySelector("#category").classList.contains('category') )
+
+                document.querySelector("#category").classList.toggle('current');
+        })
+    </script>
+
+{% endblock  %}
+
+{% block style %}
+    {% for category in category%}
+        {% if category.category_object.type == 'manhwa' %}
+            <style>
+                .bricks-wrapper .entry__thumb .manhwa::before {
+                z-index: 1;
+                content: "";
+                display: block;
+                background: rgba(0, 0, 0, 0.8);
+                opacity: 0;
+                visibility: hidden;
+                width: 100%;
+                height: 100%;
+                -webkit-transition: all 0.3s ease-in-out;
+                transition: all 0.3s ease-in-out;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+            .bricks-wrapper .entry__thumb .manhwa::after {
+                z-index: 1;
+                display: block;
+                content: "MANHWA";
+                font-family: georgia, serif;
+                font-size: 1.2rem;
+                height: 90px;
+                width: 90px;
+                letter-spacing: .2rem;
+                line-height: 90px;
+                margin-left: -45px;
+                margin-top: -45px;
+                text-align: center;
+                color: white;
+                opacity: 0;
+                visibility: hidden;
+                -webkit-transform: scale(0.5);
+                transform: scale(0.5);
+                -webkit-transition: all 0.3s ease-in-out;
+                transition: all 0.3s ease-in-out;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+            }
+
+            .bricks-wrapper .entry__thumb:hover .manhwa::before {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .bricks-wrapper .entry__thumb:hover .manhwa::after {
+                opacity: 1;
+                visibility: visible;
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+
+            .bricks-wrapper .entry__thumb:hover .manhwa img {
+                -webkit-transform: scale(1.05);
+                transform: scale(1.05);
+            }
+            </style>
+        {% endif %}
+
+        {% if category.category_object.type == 'manhua' %}
+            <style>
+                .bricks-wrapper .entry__thumb .manhua::before {
+                z-index: 1;
+                content: "";
+                display: block;
+                background: rgba(0, 0, 0, 0.8);
+                opacity: 0;
+                visibility: hidden;
+                width: 100%;
+                height: 100%;
+                -webkit-transition: all 0.3s ease-in-out;
+                transition: all 0.3s ease-in-out;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+            .bricks-wrapper .entry__thumb .manhua::after {
+                z-index: 1;
+                display: block;
+                content: "MANHUA";
+                font-family: georgia, serif;
+                font-size: 1.2rem;
+                height: 90px;
+                width: 90px;
+                letter-spacing: .2rem;
+                line-height: 90px;
+                margin-left: -45px;
+                margin-top: -45px;
+                text-align: center;
+                color: white;
+                opacity: 0;
+                visibility: hidden;
+                -webkit-transform: scale(0.5);
+                transform: scale(0.5);
+                -webkit-transition: all 0.3s ease-in-out;
+                transition: all 0.3s ease-in-out;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+            }
+
+            .bricks-wrapper .entry__thumb:hover .manhua::before {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .bricks-wrapper .entry__thumb:hover .manhua::after {
+                opacity: 1;
+                visibility: visible;
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+
+            .bricks-wrapper .entry__thumb:hover .manhua img {
+                -webkit-transform: scale(1.05);
+                transform: scale(1.05);
+            }
+            </style>
+        {% endif %}
+    {% endfor %}
+{% endblock%}
+
+
+{% block body %}
+
+
+    <!-- page header
+    ================================================== -->
+    <section class="s-pageheader">
+        <div class="row current-cat">
+            <div class="column">
+                <h1 class="h2" style="color: darkmagenta ;">CATEGORY</h1>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- masonry
+    ================================================== -->
+    <section class="s-bricks with-top-sep">
+
+        <div class="masonry">
+
+            <!-- brick-wrapper -->
+            <div class="bricks-wrapper h-group">
+ 
+                <div class="grid-sizer"></div>
+            {% for category in category %}
+            {% if category.category_object.type == 'manhwa'  %}
+                <article class="brick entry format-standard animate-this">
+    
+                    <div class="entry__thumb">
+                        
+                        <a href=" {% url 'manhwa' %} " class=" thumb-link  manhwa" >
+                            <img src=" {{category.category_object.categoryimage.url }} " 
+                                 srcse {% static 't="imag' %} es/thumbs/masonry/woodcraft-600.jpg 1x, images/thumbs/masonry/woodcraft-1200.jpg 2x" alt="">
+                        </a>
+                   
+                        <div style="text-align: center ;">MANHWA</div>
+     
+                    </div> <!-- end entry__thumb -->
+    
+               
+    
+                </article> <!-- end entry -->
+                {% elif category.category_object.type == 'manhua'  %}
+                <article class="brick entry format-standard animate-this">
+    
+                    <div class="entry__thumb">
+                        
+                        <a href=" {% url 'manhua' %} " class=" thumb-link  manhua" >
+                            <img src=" {{category.category_object.categoryimage.url }} " 
+                                 srcse {% static 't="imag' %} es/thumbs/masonry/woodcraft-600.jpg 1x, images/thumbs/masonry/woodcraft-1200.jpg 2x" alt="">
+                        </a>
+                   
+                        <div style="text-align: center  ;">MANHUA</div>
+            
+                    
+                        
+                     
+                    </div> <!-- end entry__thumb -->
+    
+               
+    
+                </article> <!-- end entry -->
+                {% endif %}
+            {% endfor %}
+ 
+            </div> <!-- end brick-wrapper --> 
+ 
+        </div> <!-- end masonry -->
+
+      
+
+    </section> <!-- end s-bricks -->
+
+
+    {% endblock %}

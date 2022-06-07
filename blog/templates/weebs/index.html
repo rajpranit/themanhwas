@@ -1,0 +1,171 @@
+{% extends 'weebs/base.html' %}
+{% load static %}
+
+{% block script %}
+    <script>
+        document.addEventListener('DOMContentLoaded',function(){
+            if ( document.querySelector("#home").classList.contains('home') )
+
+                document.querySelector("#home").classList.toggle('current');
+        })
+    </script>
+
+{% endblock  %}
+
+{% block body %}
+    
+    <!-- masonry
+    ================================================== -->
+    <section class="s-bricks">
+
+        <div class="masonry">
+        
+            <div class="bricks-wrapper h-group">
+ 
+                <div class="grid-sizer"></div>
+                
+                    <div class="brick entry featured-grid animate-this">
+                        <div class="entry__content">
+                            <div class="featured-post-slider">
+                                {% for posts in sliderpost %}
+                                
+                                  
+                                        <div class="featured-post-slide">
+                                            <div class="f-slide">
+                                                
+                                                <div class="f-slide__background" style="background-image:url(' {{posts.poster_image.url}} ');"></div>
+                                                <div class="f-slide__overlay"></div>
+            
+                                                <div class="f-slide__content">
+                                                    <ul class="f-slide__meta">
+                                                        <li>{{ posts.author.first_name }}</li> 
+                                                        <li><a href="#" >Manhwamen</a></li>
+                                                    </ul>
+                                                    
+                                                    <h1 class="f-slide__title"><a href=" {% url 'article-detail' posts.pk %} " title="">{{ posts.title}}</a></h1> 
+                                                    
+                                                    <ul class="f-slide__meta">
+                                                        {% if posts.posted_on %}
+                                                            <li>{{ posts.posted_on }}</li> 
+                                                        {% else %}
+                                                            <li></li>
+                                                        {% endif %}
+                                                    </ul>	
+            
+                                                </div>
+            
+                                            </div> <!-- f-slide -->
+                                        </div> <!-- featured-post-slide -->
+                                   
+                                        {% endfor %}
+                                </div> <!-- end feature post slider -->
+                            
+    
+                            <div class="featured-post-nav">
+                                <button class="featured-post-nav__prev">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12.707 17.293L8.414 13H18v-2H8.414l4.293-4.293-1.414-1.414L4.586 12l6.707 6.707z"></path></svg>
+                                </button>
+                                <button class="featured-post-nav__next">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M11.293 17.293l1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"></path></svg>
+                                </button>
+                            </div> <!-- featured-post-nav -->
+    
+                        </div> <!-- end entry content -->
+                    </div> <!-- end entry, featured grid -->
+                    
+                
+
+                {% for post in allpost %}
+                {% if post.post_type == 'manhwapost' %}
+                    <article class="brick entry format-standard animate-this">
+        
+                        <div class="entry__thumb">
+                            <a href=" {% url 'article-detail' post.id %} " class="thumb-link">
+                                <img src=" {{ post.poster_image.url }} " 
+                                    srcse {% static 't="imag' %} es/thumbs/masonry/woodcraft-600.jpg 1x, images/thumbs/masonry/woodcraft-1200.jpg 2x" alt="">
+                            </a>
+                        </div> <!-- end entry__thumb -->
+        
+                        <div class="entry__text">
+                            <div class="entry__header">
+        
+                                <div class="entry__meta">
+                                    <span class="entry__cat-links">
+                                        <a href="{% url 'manhwa' %}">{{post.Type}}</a> 
+                                        <p>Posted On - {{ post.posted_on }}</p>
+                                    
+                                    </span>
+                                </div>
+        
+                                <h1 class="entry__title"><a href=" {% url 'article-detail' post.id %} ">{{ post.title }}.</a></h1>
+                                
+                            </div>
+                            <div class="entry__excerpt">
+                                <p>
+                                   {{ post.body }}
+                                </p>
+                            </div>
+                        </div> <!-- end entry__text -->
+        
+                    </article> <!-- end entry -->
+
+                {% elif post.post_type == 'manhuapost' %}
+                    <article class="brick entry format-standard animate-this">
+    
+                        <div class="entry__thumb">
+                            <a href=" {% url 'article-detail' post.id %} " class="thumb-link">
+                                <img src=" {{ post.poster_image.url }} " 
+                                    srcse {% static 't="imag' %} es/thumbs/masonry/tulips-600.jpg 1x, images/thumbs/masonry/tulips-1200.jpg 2x" alt="">
+                            </a>
+                        </div>  <!-- end entry__thumb -->
+    
+                        <div class="entry__text">
+                            <div class="entry__header">
+        
+                                <div class="entry__meta">
+                                    <span class="entry__cat-links">
+                                        <a href="#"> {{ post.Type}} </a>
+                                        <p>Posted On - {{ post.posted_on }}</p>
+                                    </span>
+                                </div>
+        
+                                <h1 class="entry__title"><a href="  ">{{post.title}}</a></h1>
+                                
+                            </div>
+                            <div class="entry__excerpt">
+                                <p>
+                                {{ post.body }}
+                                </p>
+                            </div>
+                        </div> <!-- end entry__text -->
+                    
+                    </article> <!-- end article -->
+                {% endif%}
+                {% endfor %}
+               
+               
+                   
+ 
+                    <article class="brick entry format-link animate-this">
+ 
+                    <div class="entry__thumb">
+                        <div class="link-wrap">
+                            <a href="https://tachiyomi.org/"><p>Looking for reliable Manhwa and Manhua reading app We recommend Tachiomi .</p></a>
+                            <cite>
+                                <a target="_blank" href="https://tachiyomi.org/">Tachiyomi App</a>
+                            </cite>
+                        </div>
+                    </div> <!-- end entry__thumb -->
+                
+                    </article> <!-- end article -->
+ 
+ 
+            </div> <!-- end brick-wrapper --> 
+       
+        </div> <!-- end masonry -->
+
+        
+    </section> <!-- end s-bricks -->
+
+
+{% endblock %}

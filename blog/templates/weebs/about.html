@@ -1,0 +1,54 @@
+{% extends 'weebs/base.html' %}
+{% load static %}
+
+{% block script %}
+    <script>
+        document.addEventListener('DOMContentLoaded',function(){
+            if ( document.querySelector("#about").classList.contains('about') )
+
+                document.querySelector("#about").classList.toggle('current');
+        })
+    </script>
+
+{% endblock  %}
+
+{% block body %}
+
+
+    <!-- content
+    ================================================== -->
+    <section style="padding-top: -2rem ;" class="s-content">
+        <div class="row">
+            <div class="column large-12">
+
+                <section>
+                    <h1 style="text-align: center; text-decoration: underline;font-family: cursive;color: cadetblue; ">TheManhwas</h1>
+                    <div class="s-content__media">
+                        <img src=" {% static 'images/thumbs/about/about-1050.jpg' %} " 
+                             srcse {% static 't="imag' %} es/thumbs/about/about-2100.jpg 2100w, 
+                                     images/thumbs/about/about-1050.jpg 1050w, 
+                                     images/thumbs/about/about-525.jpg 525w" sizes="(max-width: 2100px) 100vw, 2100px" alt="">
+                    </div> <!-- end s-content__media -->
+
+                    <div class="s-content__primary">
+
+                        <h1 class="s-content__title">Learn More About Us.</h1>	
+
+                        <p class="lead">WE ARE HERE TO SUGGEST YOU ALL WITH SOME AMAZING READING CONTENT.</p> 
+
+                        
+                        <hr>
+
+                        
+
+                     
+
+                    </div> <!-- end s-content__primary -->
+
+                </section>
+
+            </div> <!-- end column -->
+        </div> <!-- end row -->
+    </section> <!-- end s-content -->
+
+{% endblock %}

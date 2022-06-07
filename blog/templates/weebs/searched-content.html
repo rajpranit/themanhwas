@@ -1,0 +1,29 @@
+{% extends 'weebs/base.html' %}
+{% load static %}
+{% block body %}
+
+<section class="s-pageheader">
+    <div class="row current-cat">
+        <div class="column">
+            <h3>YOU SEARCHED FOR - {{ searched }}</h3>
+        </div>
+    </div>
+</section>
+
+<section class="s-content s-content--single">
+    <div class="row">
+        <div style="text-align: center ;" class="column large-12">
+
+{% for post in posts %}
+            
+<a href=" {% url 'article-detail' post.pk %} "><button type="button" class=" btn-outline-warning">{{post.title}}</button></a><br>
+{% endfor %}
+
+</div> <!-- end column -->
+</div> <!-- end row -->
+
+
+
+
+</section> <!-- end s-content -->
+{% endblock %}

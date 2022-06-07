@@ -1,0 +1,73 @@
+{% extends 'weebs/base.html' %}
+{% load static %}
+
+{% block body %}
+
+ <!-- page header
+    ================================================== -->
+    <section class="s-pageheader">
+        <div class="row current-cat">
+            <div class="column">
+                <h1 class="h2">Category: Manhua</h1>
+            </div>
+        </div>
+    </section>
+
+    <section class="s-bricks with-top-sep">
+
+        <div class="masonry">
+
+            <!-- brick-wrapper -->
+            <div class="bricks-wrapper h-group">
+ 
+                <div class="grid-sizer"></div>
+
+                {% for post in post %}
+                <article class="brick entry format-standard animate-this">
+        
+                    <div class="entry__thumb">
+                        <a href=" {% url 'article-detail' post.id %} " class="thumb-link">
+                            <img src=" {{ post.poster_image.url }} " 
+                                srcse {% static 't="imag' %} es/thumbs/masonry/woodcraft-600.jpg 1x, images/thumbs/masonry/woodcraft-1200.jpg 2x" alt="">
+                        </a>
+                    </div> <!-- end entry__thumb -->
+    
+                    <div class="entry__text">
+                        <div class="entry__header">
+    
+                            <div class="entry__meta">
+                                <span class="entry__cat-links">
+                                    <a href="{% url 'manhwa' %}">{{ post.Type }}</a> 
+                                
+                                </span>
+                            </div>
+    
+                            <h1 class="entry__title"><a href=" {% url 'article-detail' post.id %} ">{{ post.title }}.</a></h1>
+                            
+                        </div>
+                        <div class="entry__excerpt">
+                            <p>
+                                {{ post.body }}
+                            </p>
+                        </div>
+                    </div> <!-- end entry__text -->
+    
+                </article> <!-- end entry -->
+                {% endfor %}
+
+
+
+
+                </div> <!-- end brick-wrapper --> 
+ 
+            </div> <!-- end masonry -->
+     
+
+    </section> <!-- end s-bricks -->
+
+
+
+
+
+
+{% endblock %}
