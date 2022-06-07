@@ -38,7 +38,7 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
 
-STATIC_URL = 'https://the-manhwas-bucket.s3.us-west-2.amazonaws.com/static/'
+STATIC_URL = 'https://the-manhwas-bucket.s3.us-west-2.amazonaws.com/static/django_extensions/'
 MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/media/"
 
 #heroku logging
