@@ -1,10 +1,9 @@
-from pickle import FALSE
 import django_on_heroku
 from .base import *
 
 SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'themanhwas.herokuapp.com',
@@ -26,7 +25,7 @@ AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl':'max-age=86400'
 }
 
-AWS_LOCATION = 'static'
+AWS_LOCATION = 'static/'
 
 AWS_QUERYSTRING_AUTH = False
 
