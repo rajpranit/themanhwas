@@ -1,6 +1,6 @@
-from pickle import FALSE
 import django_on_heroku
 from .base import *
+from decouple import config
 
 SECRET_KEY = config('SECRET_KEY')
 
@@ -38,9 +38,7 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
 
-STATIC_URL = 'http://' + 'the-manhwas-bucket' + '.s3.us-west-2.amazonaws.com/'
-ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
-
+STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/static/"
 MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/media/"
 
 #heroku logging
