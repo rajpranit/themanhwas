@@ -1,3 +1,4 @@
+from pickle import FALSE
 import django_on_heroku
 from .base import *
 
@@ -72,5 +73,5 @@ LOGGING = {
 
 # heroku setting
 
-django_on_heroku.settings(locals())
+django_on_heroku.settings(locals() , staticfiles=False)
 del DATABASES ['default'] ['OPTIONS'] ['sslmode']
