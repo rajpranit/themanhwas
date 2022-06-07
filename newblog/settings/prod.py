@@ -5,7 +5,7 @@ from whitenoise import WhiteNoise
 
 SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'themanhwas.herokuapp.com',
